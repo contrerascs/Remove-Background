@@ -33,6 +33,21 @@ def main(page: ft.Page):
         status.visible = True
         status.value = 'Procesando imagen...'
         page.update()
+
+        try:
+            input_img = Image.open(input_path)
+            output_img = remove(input_img)
+            if not e.path.endswith('.png'):
+                e.path += '.png'
+            output_img.save(e.path)
+            status.value = 'Imagen guardada exitosamente'
+            status.color = ft.Colors.GREEN
+
+        except Exception as ex:
+            status.value = f'Error: {str(ex)}'
+            status.color = ft.Colors.RED
+        
+        page.update()
     
     pick_files_dialog = ft.FilePicker(
         on_result=pick_file_result
